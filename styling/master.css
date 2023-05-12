@@ -1,0 +1,49 @@
+:root {
+    --primary-color: #6C10F4;
+    --primary-color-hover: #8E12FE;
+    --primary-color-border: #4A1FC2;
+    --bootstrap-accent: #2B3035;
+}
+
+#index-main {
+    display: flex;
+    margin-top: 5em;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color-hover);
+    border-radius: 0.5em;
+}
+
+.btn:hover {
+    background-color: var(--primary-color-hover);
+    border-color: var(--primary-color-hover);
+}
+
+.btn:active {
+    background-color: var(--primary-color-hover);
+    border-color: var(--primary-color-hover);
+}
+
+#index-main figure img {
+    width: 100%;
+    opacity: 80%;
+}
+
+.skill-card {
+    padding-top: 1rem;
+    background-color: var(--bootstrap-accent);
+    border-radius: 1rem;
+    box-shadow: black 3px 3px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+}
+
+.skill-logo {
+    width: 120px;
+}
+
