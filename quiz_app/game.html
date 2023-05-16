@@ -18,23 +18,33 @@
 <body>
 <main>
     <div id="game" class="px-4 py-5 my-5 text-center">
+        <div class="hud-container container row my-4 gx-0 gy-3">
+            <div class="col">
+                <h5>Question</h5>
+                <h1 id="question-num-text">1/4</h1>
+            </div>
+            <div class="col">
+                <h5>Score</h5>
+                <h1 id="score-text">0</h1>
+            </div>
+        </div>
         <h1 id="question" class="text-body-emphasis">What is the answer to this question?</h1>
-        <div class="row my-5 gx-0 gy-3">
+        <div class="row my-3 gx-0 gy-3">
             <div class="col-12 d-flex border border-light rounded choice-container">
-                <p class="m-0 p-3 rounded bg-primary text-white fw-bold">A.</p>
-                <p class="choice m-0 mx-2 p-3" data-number="1">Choice 1s</p>
+                <p class="choice-prefix m-0 p-3 rounded bg-primary text-white fw-bold">A.</p>
+                <p class="choice m-0 mx-2 p-3" data-number="1"></p>
             </div>
             <div class="col-12 d-flex border border-light rounded choice-container">
-                <p class="m-0 p-3 rounded bg-primary text-white fw-bold">B.</p>
-                <p class="choice m-0 mx-2 p-3" data-number="2">Choice 2s</p>
+                <p class="choice-prefix m-0 p-3 rounded bg-primary text-white fw-bold">B.</p>
+                <p class="choice m-0 mx-2 p-3" data-number="2"></p>
             </div>
             <div class="col-12 d-flex border border-light rounded choice-container">
-                <p class="m-0 p-3 rounded bg-primary text-white fw-bold">C.</p>
-                <p class="choice m-0 mx-2 p-3" data-number="3">Choice 3s</p>
+                <p class="choice-prefix m-0 p-3 rounded bg-primary text-white fw-bold">C.</p>
+                <p class="choice m-0 mx-2 p-3" data-number="3"></p>
             </div>
             <div class="col-12 d-flex border border-light rounded choice-container">
-                <p class="m-0 p-3 rounded bg-primary text-white fw-bold">D.</p>
-                <p class="choice m-0 mx-2 p-3" data-number="4">Choice 4s</p>
+                <p class="choice-prefix m-0 p-3 rounded bg-primary text-white fw-bold">D.</p>
+                <p class="choice m-0 mx-2 p-3" data-number="4"></p>
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice'));
+const score_el = document.getElementById('score-text');
+const question_num_el = document.getElementById('question-num-text');
 
 // CONSTANTS
 const CORRECT_BONUS = 10;
@@ -48,20 +50,57 @@ function start_game() {
 }
 
 function get_new_question() {
+    if (available_questions.length === 0 || question_counter >= MAX_QUESTIONS){
+        // GO TO END PAGE
+        console.log("END" + available_questions + ", " + question_counter);
+        // return window.location.assign('/end.html');
+    }
+
     question_counter++;
-    const question_index = Math.floor(Math.random() * available_questions.length)
+    question_num_el.innerText = `${question_counter}/${MAX_QUESTIONS}`;
+    score_el.innerText = score;
+
+    const question_index = Math.floor(Math.random() * available_questions.length);
 
     current_question = available_questions[question_index];
     const correct_answer = current_question.answer;
 
     question.innerText = current_question.question;
-    choices[0].innerText = current_question.choice1;
-    choices[1].innerText = current_question.choice2;
-    choices[2].innerText = current_question.choice3;
-    choices[3].innerText = current_question.choice4;
+    choices.forEach(choice => {
+        const number = choice.dataset['number'];
+        choice.innerText = current_question['choice' + number];
+
+    })
+    available_questions.splice(question_index, 1);
+
+    accepting_answers = true;
 
 }
 
+function increment_score(CORRECT_BONUS) {
+    score += CORRECT_BONUS;
+    score_el.innerText = score;
+}
 
+choices.forEach(choice => {
+    choice.addEventListener('click', event => {
+        if (!accepting_answers) return;
+
+        accepting_answers = false;
+        const selected_choice = event.target;
+        const selected_answer = selected_choice.dataset['number'];
+
+        const classToApply = selected_answer == current_question.answer ? 'correct' : 'incorrect';
+
+        if (classToApply === 'correct')
+            increment_score(CORRECT_BONUS);
+
+        selected_choice.parentElement.classList.add(classToApply);
+        setTimeout( () => {
+            selected_choice.parentElement.classList.remove(classToApply);
+            get_new_question();
+        }, 1000);
+    })
+})
 
 start_game();
