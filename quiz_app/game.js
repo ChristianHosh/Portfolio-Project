@@ -53,7 +53,7 @@ function get_new_question() {
     if (available_questions.length === 0 || question_counter >= MAX_QUESTIONS){
         // GO TO END PAGE
         console.log("END" + available_questions + ", " + question_counter);
-        // return window.location.assign('/end.html');
+        return window.location.assign('end.html/');
     }
 
     question_counter++;
