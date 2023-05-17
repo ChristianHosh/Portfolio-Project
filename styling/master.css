@@ -11,17 +11,21 @@
 }
 
 .btn {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color-hover);
-    border-radius: 0.5em;
+    margin-bottom: 0.25rem;
 }
 
-.btn:hover {
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color-hover);
+}
+
+.btn-primary:hover {
     background-color: var(--primary-color-hover);
     border-color: var(--primary-color-hover);
 }
 
-.btn:active {
+.btn-primary:active {
     background-color: var(--primary-color-hover);
     border-color: var(--primary-color-hover);
 }

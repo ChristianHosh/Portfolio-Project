@@ -5,7 +5,7 @@ const question_num_el = document.getElementById('question-num-text');
 
 // CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 10;
 
 let current_question = {};
 let accepting_answers = true;
@@ -13,33 +13,33 @@ let score = 0;
 let question_counter = 0;
 let available_questions = [];
 
-let questions = [
-    {
-        question: 'Inside which HTML element do we put the JavaScript??',
-        choice1: '<script>',
-        choice2: '<javascript>',
-        choice3: '<js>',
-        choice4: '<scripting>',
-        answer: 1,
-    },
-    {
-        question:
-            "What is the correct syntax for referring to an external script called 'xxx.js'?",
-        choice1: "<script href='xxx.js'>",
-        choice2: "<script name='xxx.js'>",
-        choice3: "<script src='xxx.js'>",
-        choice4: "<script file='xxx.js'>",
-        answer: 3,
-    },
-    {
-        question: " How do you write 'Hello World' in an alert box?",
-        choice1: "msgBox('Hello World');",
-        choice2: "alertBox('Hello World');",
-        choice3: "msg('Hello World');",
-        choice4: "alert('Hello World');",
-        answer: 4,
-    },
-];
+let questions = [];
+fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple")
+    .then( res => {
+        return res.json();
+    })
+    .then(loaded_questions => {
+        console.log(loaded_questions.results);
+        questions = loaded_questions.results.map( loaded_question => {
+            const formatted_question = {
+                question : loaded_question.question,
+
+            }
+            const answer_choices = [...loaded_question.incorrect_answers];
+            formatted_question.answer = Math.floor(Math.random() * 3) + 1;
+            answer_choices.splice(formatted_question.answer - 1, 0, loaded_question.correct_answer);
+
+            answer_choices.forEach((choice, index) => {
+                formatted_question["choice" + (index+1)] = choice;
+            })
+            return formatted_question;
+        })
+
+        start_game();
+    })
+    .catch(err => {
+        console.error(err);
+    })
 
 function start_game() {
     question_counter = 0;
@@ -53,7 +53,8 @@ function get_new_question() {
     if (available_questions.length === 0 || question_counter >= MAX_QUESTIONS){
         // GO TO END PAGE
         console.log("END" + available_questions + ", " + question_counter);
-        return window.location.assign('end.html/');
+        localStorage.setItem('most_recent_score', score);
+        return window.location.assign('end.html');
     }
 
     question_counter++;
@@ -102,5 +103,3 @@ choices.forEach(choice => {
         }, 1000);
     })
 })
-
-start_game();
