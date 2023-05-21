@@ -2,6 +2,8 @@ const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice'));
 const score_el = document.getElementById('score-text');
 const question_num_el = document.getElementById('question-num-text');
+const game = document.getElementById('game');
+const loader = document.getElementById('loader');
 
 // CONSTANTS
 const CORRECT_BONUS = 10;
@@ -14,7 +16,7 @@ let question_counter = 0;
 let available_questions = [];
 
 let questions = [];
-fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple")
+fetch("https://opentdb.com/api.php?amount=10&category=9&type=multiple&encode=base64")
     .then( res => {
         return res.json();
     })
@@ -22,7 +24,7 @@ fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=mul
         console.log(loaded_questions.results);
         questions = loaded_questions.results.map( loaded_question => {
             const formatted_question = {
-                question : loaded_question.question,
+                question : atob(loaded_question.question),
 
             }
             const answer_choices = [...loaded_question.incorrect_answers];
@@ -30,7 +32,7 @@ fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=mul
             answer_choices.splice(formatted_question.answer - 1, 0, loaded_question.correct_answer);
 
             answer_choices.forEach((choice, index) => {
-                formatted_question["choice" + (index+1)] = choice;
+                formatted_question["choice" + (index+1)] = atob(choice);
             })
             return formatted_question;
         })
@@ -47,6 +49,8 @@ function start_game() {
     available_questions = [...questions];
     console.log(available_questions);
     get_new_question();
+    game.classList.remove('visually-hidden');
+    loader.classList.add('visually-hidden');
 }
 
 function get_new_question() {
