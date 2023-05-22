@@ -13,11 +13,13 @@
     transition: transform 0.15s;
 }
 
-.choice-container:hover {
-    cursor: pointer;
-    box-shadow: 0 0.2rem 0.7rem 0 whitesmoke;
-    transform: translateY(-0.1rem);
-    transition: transform 0.15s;
+@media (hover: hover){
+    .choice-container:hover {
+        cursor: pointer;
+        box-shadow: 0 0.2rem 0.7rem 0 whitesmoke;
+        transform: translateY(-0.1rem);
+        transition: transform 0.15s;
+    }
 }
 
 .choice {
